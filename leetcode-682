@@ -1,0 +1,42 @@
+class Solution {
+public:
+bool isValidNumber(const std::string& s) {
+    try {
+        size_t idx;
+        std::stod(s, &idx);
+        return idx == s.size(); 
+    } catch (std::invalid_argument&) {
+        return false;
+    } catch (std::out_of_range&) {
+        return false;
+    }
+}
+    int calPoints(vector<string>& operations) {
+        stack<int> st;
+
+        for (int i = 0; i < operations.size(); i++){
+            if(isValidNumber(operations[i])){
+                st.push(stoi(operations[i]));
+            }
+            else if(operations[i] == "D"){
+                st.push(st.top() * 2);
+            }
+            else if(operations[i] == "C"){
+                st.pop();
+            }
+            else if(operations[i] == "+"){
+                int a = st.top(); st.pop();
+                int b = st.top();
+                st.push(a);
+                st.push(a + b);
+            }
+        }
+
+        int sum = 0;
+        while(!st.empty()){
+            sum += st.top();
+            st.pop();
+        }
+        return sum;
+    }
+};
