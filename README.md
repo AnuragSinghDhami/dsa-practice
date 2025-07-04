@@ -1,2 +1,2 @@
 # dsa-practice
-important question with solution
+important question with solution and tc
