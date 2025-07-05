@@ -1,0 +1,52 @@
+class Solution {
+public:
+    string concatHex36(int n) {
+
+        string hex16 = "";
+        int sq = n*n;
+        
+        while(sq >= 16){
+            int num = sq % 16;
+            if(num == 10) hex16 += "A";
+            else if(num == 11) hex16 += "B";
+            else if(num == 12) hex16 += "C";
+            else if(num == 13) hex16 += "D";
+            else if(num == 14) hex16 += "E";
+            else if(num == 15) hex16 += "F";
+            else hex16 += to_string(num);
+
+            sq = sq/16;
+        }
+        if(sq == 10) hex16 += "A";
+        else if(sq == 11) hex16 += "B";
+        else if(sq == 12) hex16 += "C";
+        else if(sq == 13) hex16 += "D";
+        else if(sq == 14) hex16 += "E";
+        else if(sq == 15) hex16 += "F";
+        else hex16 += to_string(sq);
+        reverse(hex16.begin(), hex16.end());
+
+        string hex32 = "";
+        sq = n*n*n;
+
+        while(sq >= 36){
+            int num = sq % 36;
+            
+            if(num >= 0 && num <= 9){
+                hex32 += to_string(num);
+            }
+            else{
+                hex32 += char(55 + num);
+            }
+            sq = sq/36;
+        }
+         if(sq >= 0 && sq <= 9){
+          hex32 += to_string(sq);
+        }
+        else{
+            hex32 += char(55 + sq);
+        }
+        reverse(hex32.begin(), hex32.end());
+        return hex16+hex32;
+    }
+};©leetcode
